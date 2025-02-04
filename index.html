@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adyen Customer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@adyen/adyen-platform-experience-web@1.2.0/dist/umd/adyen-platform-experience-web.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Navbar - Fixed Vertical Layout */
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-align: left;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar li:hover {
+            background-color: #2c8bf2;
+            color: white;
+        }
+
+        /* Content area with single scrollbar */
+        .content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 20px;
+            height: 100vh;
+            overflow: auto;
+        }
+
+        .dashboard-container {
+            display: none;
+            width: 100%;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Dashboard Title */
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                display: flex;
+                justify-content: space-around;
+                padding: 10px;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li id="transaction-overview-tab">Transactions Overview</li>
+            <li id="payout-dashboard-tab">Payout Overview</li>
+        </ul>
+    </div>
+
+    <!-- Container for the dashboards -->
+    <div class="content">
+        <div class="dashboard-title">Adyen Customer Dashboard</div>
+        <div id="transactions-overview-container" class="dashboard-container"></div>
+        <div id="payouts-overview-container" class="dashboard-container"></div>
+    </div>
+
+    <script type="module" src="./src/adyen.js"></script>
+</body>
+</html>
