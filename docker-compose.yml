@@ -1,0 +1,22 @@
+version: '3'
+services:
+  backend:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+  frontend:
+    image: node:22
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["npx", "vite", "--host"]
+    ports:
+      - "5173:5173"  # Default port Vite
+    depends_on:
+      - backend
