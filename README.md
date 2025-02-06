@@ -34,7 +34,7 @@ Create a `.env` file based on `config.js` and adjust it with Adyen credentials.
 npm start
 ```
 
-The application will run on `http://localhost:3000`
+The application will run on `http://localhost:5173`
 
 ## 🐳 Docker
 
@@ -44,7 +44,8 @@ The application will run on `http://localhost:3000`
 docker-compose up --build
 ```
 
-The application will run on `http://localhost:3000`
+The application backend will run on `http://localhost:5000`
+The application frontend will run on `http://localhost:5173`
 
 ### 2. Stop Container
 
