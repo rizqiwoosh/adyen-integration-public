@@ -1,4 +1,4 @@
-    # Adyen Customer Dashboard
+# Adyen Customer Dashboard
 
 Adyen Customer Dashboard is a Node.js-based application used to manage customer transactions using Adyen payment services.
 
@@ -74,5 +74,5 @@ This application is under the MIT license. Feel free to use and develop it as ne
 
 ---
 
-Developed by **Muhamamd Rizqu**
+Developed by **Muhamamd Rizqi**
 
