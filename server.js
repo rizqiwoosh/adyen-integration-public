@@ -120,6 +120,50 @@ app.post('/api/create-payout-session', async (req, res) => {
     }
 });
 
+// API endpoint to create session for Report Dashboard
+app.post('/api/create-report-session', async (req, res) => {
+    try {
+        // Ensure credentials are available before making the request
+        if (!credentials || !credentials.ADYEN_API_KEY || !credentials.accountHolderId || !credentials.ADYEN_SESSION_URL) {
+            return res.status(400).json({ error: "Credentials not set" });
+        }
+
+        console.log("Using stored credentials:", credentials);
+
+        // Send the request to Adyen API to create a session
+        const response = await axios.post(
+            credentials.ADYEN_SESSION_URL,
+            {
+                allowOrigin: credentials.allowOrigin,
+                product: "platform",
+                policy: {
+                    resources: [
+                        {
+                            accountHolderId: credentials.accountHolderId, // Use dynamic accountHolderId
+                            type: "accountHolder"
+                        }
+                    ],
+                    roles: [
+                         "Reports Overview Component: View",
+                    ]
+                }
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": credentials.ADYEN_API_KEY
+                }
+            }
+        );
+
+        console.log("✅ Adyen API response payout:", response.data);
+        res.json(response.data); // Send Adyen response to frontend
+    } catch (error) {
+        console.error("❌ Adyen API error:", error.response ? error.response.data : error.message);
+        res.status(500).json({ error: "Failed to create session" });
+    }
+});
+
 
 
 // Start the server
